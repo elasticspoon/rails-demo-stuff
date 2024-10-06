@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require "bundler/inline"
+require 'bundler/inline'
 
 gemfile(true) do
-  source "https://rubygems.org"
+  source 'https://rubygems.org'
 
-  gem "rails"
+  gem 'rails'
   # If you want to test against edge Rails replace the previous line with this:
   # gem "rails", github: "rails/rails", branch: "main"
 end
 
-require "minitest/autorun"
-require "action_view"
+require 'minitest/autorun'
+require 'action_view'
 
 class BugTest < ActionView::TestCase
   helper do
@@ -21,12 +21,12 @@ class BugTest < ActionView::TestCase
   end
 
   def test_stuff
-    render inline: <<~ERB, locals: { key: "value" }
+    render inline: <<~ERB, locals: { key: 'value' }
       <p><%= upcase(key) %></p>
     ERB
 
-    element = rendered.html.at("p")
+    element = rendered.html.at('p')
 
-    assert_equal element.text, "VALUE"
+    assert_equal element.text, 'VALUE'
   end
 end

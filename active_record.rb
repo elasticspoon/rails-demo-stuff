@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-require "bundler/inline"
+require 'bundler/inline'
 
 gemfile(true) do
-  source "https://rubygems.org"
+  source 'https://rubygems.org'
 
-  gem "rails"
+  gem 'rails'
   # If you want to test against edge Rails replace the previous line with this:
   # gem "rails", github: "rails/rails", branch: "main"
 
-  gem "sqlite3"
+  gem 'sqlite3'
 end
 
-require "active_record"
-require "minitest/autorun"
-require "logger"
+require 'active_record'
+require 'minitest/autorun'
+require 'logger'
 
 # This connection will do for database-independent bug reports.
-ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
+ActiveRecord::Base.logger = Logger.new($stdout)
 
 ActiveRecord::Schema.define do
   create_table :posts, force: true do |t|

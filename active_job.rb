@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-require "bundler/inline"
+require 'bundler/inline'
 
 gemfile(true) do
-  source "https://rubygems.org"
+  source 'https://rubygems.org'
 
-  gem "rails"
+  gem 'rails'
   # If you want to test against edge Rails replace the previous line with this:
   # gem "rails", github: "rails/rails", branch: "main"
 end
 
-require "active_job"
-require "minitest/autorun"
+require 'active_job'
+require 'minitest/autorun'
 
 class BuggyJob < ActiveJob::Base
   def perform
-    puts "performed"
+    puts 'performed'
   end
 end
 

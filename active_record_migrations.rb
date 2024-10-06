@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-require "bundler/inline"
+require 'bundler/inline'
 
 gemfile(true) do
-  source "https://rubygems.org"
+  source 'https://rubygems.org'
 
-  gem "rails"
+  gem 'rails'
   # If you want to test against edge Rails replace the previous line with this:
   # gem "rails", github: "rails/rails", branch: "main"
 
-  gem "sqlite3"
+  gem 'sqlite3'
 end
 
-require "active_record"
-require "minitest/autorun"
-require "logger"
+require 'active_record'
+require 'minitest/autorun'
+require 'logger'
 
 # This connection will do for database-independent bug reports.
-ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
+ActiveRecord::Base.logger = Logger.new($stdout)
 
 ActiveRecord::Schema.define do
   create_table :payments, force: true do |t|
@@ -29,7 +29,8 @@ end
 class Payment < ActiveRecord::Base
 end
 
-class ChangeAmountToAddScale < ActiveRecord::Migration::Current # or use a specific version via `Migration[number]`
+# or use a specific version via `Migration[number]`
+class ChangeAmountToAddScale < ActiveRecord::Migration::Current
   def change
     reversible do |dir|
       dir.up do
@@ -48,13 +49,13 @@ class BugTest < ActiveSupport::TestCase
     ChangeAmountToAddScale.migrate(:up)
     Payment.reset_column_information
 
-    assert_equal "decimal(10,2)", Payment.columns.last.sql_type
+    assert_equal 'decimal(10,2)', Payment.columns.last.sql_type
   end
 
   def test_migration_down
     ChangeAmountToAddScale.migrate(:down)
     Payment.reset_column_information
 
-    assert_equal "decimal(10,0)", Payment.columns.last.sql_type
+    assert_equal 'decimal(10,0)', Payment.columns.last.sql_type
   end
 end
