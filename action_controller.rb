@@ -6,6 +6,7 @@ gemfile(true) do
   source 'https://rubygems.org'
 
   gem 'rails'
+  gem 'trace_location'
   # If you want to test against edge Rails replace the previous line with this:
   # gem "rails", github: "rails/rails", branch: "main"
 end
@@ -36,6 +37,7 @@ end
 
 require 'minitest/autorun'
 require 'rack/test'
+require 'trace_location'
 
 class BugTest < ActiveSupport::TestCase
   include Rack::Test::Methods
@@ -60,6 +62,30 @@ class BugTest < ActiveSupport::TestCase
     end
     assert true
   end
+
+  # def test_trace_skipping_router
+  #   request = mock_request
+  #   TraceLocation.trace(format: :log) do
+  #     TestController.action(:index).call(request)
+  #   end
+  #   assert true
+  # end
+
+  # def test_trace_skipping_rack
+  #   request = mock_request
+  #   TraceLocation.trace(format: :log) do
+  #     app.routes.call(request)
+  #   end
+  #   assert true
+  # end
+
+  # def test_base_request_trace
+  #   request = mock_request
+  #   TraceLocation.trace(format: :log) do
+  #     app.call(request)
+  #   end
+  #   assert true
+  # end
 
   private
 
